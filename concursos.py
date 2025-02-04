@@ -33,7 +33,8 @@ with sync_playwright() as p:
                                                             replace('+', '').
                                                             replace('gratificações', '').
                                                             replace('benefícios', '').
-                                                            replace('adicionais', ''))
+                                                            replace('adicionais', '').
+                                                            replace('(2º Tenente)', ''))
                         key = 'Salário'
                     concurso[key] = value
 
