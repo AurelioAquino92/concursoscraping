@@ -7,13 +7,17 @@ concursosEncontrados = []
 valorMinimo = float(input('Digite o valor do salário desejado: '))
 
 with sync_playwright() as p:
+    print('Iniciando o navegador...')
     navegador = p.firefox.launch()
     # navegador = p.firefox.launch(headless=False)
+    print('Acessando a página de concursos...')
     pagina = navegador.new_page()
     pagina.goto(CONCURSOS_PAGE)
 
+    print('Realizando scraping...')
     items = pagina.locator('h3, ul')
     
+    print('Filtrando concursos...')
     concurso = {}
     for i in range(items.count()):
         element = items.nth(i)
@@ -34,7 +38,8 @@ with sync_playwright() as p:
                                                             replace('gratificações', '').
                                                             replace('benefícios', '').
                                                             replace('adicionais', '').
-                                                            replace('(2º Tenente)', ''))
+                                                            replace('(2º Tenente)', '').
+                                                            replace('(Aluno Oficial 2º Sargento)', ''))
                         key = 'Salário'
                     concurso[key] = value
 
